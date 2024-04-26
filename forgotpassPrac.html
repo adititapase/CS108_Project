@@ -1,0 +1,94 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Password Recovery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); /* Replace 'background-image.jpg' with your image file */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.3); 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0b0000;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 5px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #cf5990;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Password Recovery</h2>
+        <form id="recoveryForm">
+            <input type="text" id="username" name="username" placeholder="Enter Your Username" required>
+            <input type="text" id="answer" name="answer" placeholder="Answer the Secret Question" required>
+            <input type="submit" value="Recover Password">
+        </form>
+        <p id="recovery-msg" style="color: red; display: none;"></p>
+    </div>
+
+    <script>
+        document.getElementById('recoveryForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            var username = document.getElementById('username').value;
+            var answer = document.getElementById('answer').value;
+            var recoveryMessage = document.getElementById('recovery-msg');
+
+            // Load JSON file and check secret question answer
+            fetch('login.json')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username === username && data.secret_answer === answer) {
+                    // Secret question answer is correct
+                    recoveryMessage.textContent = `Your password is: ${data.password}`;
+                    recoveryMessage.style.display = 'block'; // Show recovery message
+                } else {
+                    // Secret question answer is incorrect or username not found
+                    recoveryMessage.textContent = 'Incorrect username or answer to the secret question.';
+                    recoveryMessage.style.display = 'block'; // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+    </script>
+</body>
+</html>

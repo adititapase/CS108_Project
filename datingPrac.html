@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dating Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Fill in Your Personal Details</h2>
+        <form id="datingForm">
+            <div class="form-group">
+                <label for="rollNumber">IITB Roll Number:</label>
+                <input type="text" id="rollNumber" name="rollNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year of Study:</label>
+                <select id="year" name="year" required>
+                    <option value="First">First Year</option>
+                    <option value="Second">Second Year</option>
+                    <option value="Third">Third Year</option>
+                    <option value="Fourth">Fourth Year</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="interests">Interests:</label><br>
+                <input type="checkbox" id="music" name="interests" value="Music">
+                <label for="music">Music</label><br>
+                <input type="checkbox" id="sports" name="interests" value="Sports">
+                <label for="sports">Sports</label><br>
+                <input type="checkbox" id="movies" name="interests" value="Movies">
+                <label for="movies">Movies</label><br>
+                <input type="checkbox" id="books" name="interests" value="Books">
+                <label for="books">Books</label><br>
+            </div>
+            <div class="form-group">
+                <label for="hobbies">Hobbies:</label><br>
+                <input type="checkbox" id="travel" name="hobbies" value="Travel">
+                <label for="travel">Travel</label><br>
+                <input type="checkbox" id="photography" name="hobbies" value="Photography">
+                <label for="photography">Photography</label><br>
+                <input type="checkbox" id="painting" name="hobbies" value="Painting">
+                <label for="painting">Painting</label><br>
+                <input type="checkbox" id="cooking" name="hobbies" value="Cooking">
+                <label for="cooking">Cooking</label><br>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">Photo:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+            </div>
+            <input type="submit" value="Find Right Match">
+        </form>
+        <button onclick="location.href='login.html'">Logout</button>
+    </div>
+
+    <script src="dating.js"></script>
+</body>
+</html>

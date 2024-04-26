@@ -1,0 +1,107 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Perfect Match</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); /* Replace 'background-image.jpg' with your image file */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.3); 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0b0000;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 5px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #cf5990;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <div class="container">
+        <h2>Login to Your Account</h2>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+        <p id="error-msg" style="color: red; display: none;"></p>
+        <p><a href="forgotpassPrac.html">Forgot Password?</a></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var errorMessage = document.getElementById('error-msg');
+
+            // Load JSON file and check credentials
+            fetch('loginPrac.json')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username == username && data.password == password) {
+                    // Authentication successful
+                    errorMessage.textContent = 'Correct username and password.';
+                    errorMessage.style.display = 'block';
+                    //errorMessage.style.display = 'none'; // Hide error message
+                    // Redirect to dashboard or perform any other action
+                    window.location.href = 'datingPrac.html'; // Redirect to dashboard page
+                } 
+                else {
+                    // Authentication failed
+                    errorMessage.textContent = 'Incorrect username or password.';
+                    errorMessage.style.display = 'block'; // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+    </script>
+
+</body>
+</html>
+
+
+
+
