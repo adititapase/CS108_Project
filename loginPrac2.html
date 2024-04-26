@@ -175,14 +175,20 @@
             fetch('loginPrac.json')
             .then(response => response.json())
             .then(data => {
-                if (data.username == username && data.password == password) {
-                    // Authentication successful
-                    errorMessage.textContent = 'Correct username and password.';
-                    errorMessage.style.display = 'block';
-                    //errorMessage.style.display = 'none';
-                    window.location.href = 'mainPrac.html'; 
-                } 
-                else {
+                // console.log(data)
+                var matchFound = false;
+                for (let i=0; i<data.length; i++) {
+                    if ((data[i].username == username) && (data[i].password == password)) {
+                        // Authentication successful
+                        errorMessage.textContent = 'Correct username and password.';
+                        errorMessage.style.display = 'block';
+                        //errorMessage.style.display = 'none';
+                        matchFound = true;
+                        window.location.href = 'mainPrac.html'; 
+                    } 
+                    
+                }
+                if(!matchFound) {
                     // Authentication failed
                     errorMessage.textContent = 'Incorrect username or password.';
                     errorMessage.style.display = 'block'; // Show error message
