@@ -16,20 +16,60 @@
             background-repeat: no-repeat;
         }
 
-        .login_box {
+        .box {
             position: relative;
             width: 300px;
-            margin: 60px auto;
+            height: 450px;
+            margin: 70px auto;
             padding: 20px; 
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 50px rgb(1, 9, 12);
             text-align: center;
-            background-color: rgb(9, 66, 91);
+            background-color: rgba(18, 83, 111,0.9);
+            overflow: hidden;
         }
 
-        .login_box form {
+        .box form {
             width: 100%;
         }
+
+        .box .login_box {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            transition: 1s ease-in-out;
+        }
+
+        .box.active .login_box {
+            transform: translateY(-500px);
+        }
+
+        .box.passive .login_box {
+            transform: translateY(-500px);
+        }
+
+        .box .signup_box {
+            position: absolute;
+            top: 480px;
+            left: 0;
+            transition: 1s ease-in-out;
+        }
+
+        .box.active .signup_box {
+            transform: translateY(-480px);
+        }
+
+        .box .forgot_box {
+            position: absolute;
+            top: 480px;
+            left: 0;
+            transition: 1s ease-in-out;
+        }
+
+        .box.passive .forgot_box {
+            transform: translateY(-400px);
+        }
+
 
         h1 {
             text-align: center;
@@ -42,7 +82,7 @@
         }
 
         .input_box input {
-            width: 100%;
+            width: 90%;
             height: 50px;
             background: transparent;
             border: 2px solid;
@@ -67,10 +107,10 @@
         .input_box label {
             position: absolute;
             top: 50%;
-            left: 20px;
+            left: 30px;
             transform: translateY(-50%);
             font-size: 1em;
-            color: rgb(164, 162, 162);
+            color: rgb(209, 203, 203);
             transition: 0.5s ease;
         }
 
@@ -79,7 +119,7 @@
             top: 1px;
             font-size: 0.8em;
             padding: 0 6px;
-            background-color: rgb(9, 66, 91);
+            background-color: rgb(18, 83, 111);
             color: aliceblue;
         }
 
@@ -99,9 +139,9 @@
         }
 
         .sub_button {
-            width: 100%;
+            width: 90%;
             height: 45px;
-            background-color: rgb(161, 82, 95);
+            background-color: rgba(210, 67, 90, 0.9);
             border: none;
             outline: none;
             border-radius: 40px;
@@ -112,13 +152,14 @@
         }
 
         .sub_button:hover {
-            background-color: rgb(48, 27, 27);
+            background-color: rgb(117, 11, 47);
             color: white;
         }
 
         .signup {
             margin: 20px 0 10px;
             text-align: center;
+            color: rgb(224, 221, 221);
         }
 
         .signup a {
@@ -136,32 +177,97 @@
 </head>
 
 <body>
-    <div class="login_box">
-        <h1>Login</h1>
+    <div class="box">
+        <div class="login_box">
+            <h1>Login</h1>
 
-        <form id="loginForm">
-            <div class="input_box">
-                <input type="text" id="username" required>
-                <label>Username</label>
-            </div>
+            <form id="loginForm">
+                <div class="input_box">
+                    <input type="text" id="username" required>
+                    <label>Username</label>
+                </div>
 
-            <div class="input_box">
-                <input type="text" id="password" required>
-                <label>Password</label>
-            </div>
-            
-            <p id="error-msg" style="color: red; display: none;"></p>
+                <div class="input_box">
+                    <input type="text" id="password" required>
+                    <label>Password</label>
+                </div>
+                
+                <p id="error-msg" style="color: red; display: none;"></p>
 
-            <div class="forgot_password">
-                <a href="forgotPrac.html">Forgot your Password?</a>    
-            </div>
+                <div class="forgot_password">
+                    <a href="#" class="forgot_button">Forgot your Password?</a>    
+                </div>
 
-            <button type="submit" class="sub_button">Login</button>
+                <button id="login" type="submit" class="sub_button">Login</button>
 
-            <div class="signup">
-                <a href="signUpPrac.html">Don't have an account? Signup</a>
-            </div>
-        </form>
+                <div class="signup">
+                    <p>Don't have an account? <a href="#" class="signup_button">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="signup_box">
+            <h1>Sign up</h1>
+
+            <form id="signUpForm">
+                <div class="input_box">
+                    <input type="text" id="username_signup" required>
+                    <label>Username</label>
+                </div>
+
+                <div class="input_box">
+                    <input type="text" id="password_signup" required>
+                    <label>Password</label>
+                </div>
+
+                <div class="input_box">
+                    <input type="text" id="sec_que_signup" required>
+                    <label>Secret Question</label>
+                </div>
+
+                <div class="input_box">
+                    <input type="text" id="sec_ans_signup" required>
+                    <label>Secret Answer</label>
+                </div>
+                
+                <button id="signUp" type="submit" class="sub_button">Sign Up</button>
+
+                <div class="signup">
+                    <p>Already have an account? <a href="#" class="signin_button1">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="forgot_box">
+            <h1>Forgot Password?</h1>
+
+            <form id="forgotForm">
+                <div class="input_box">
+                    <input type="text" id="username_forgot" required>
+                    <label>Username</label>
+                </div>
+
+                <p id="error-msg-2" style="color: red; display: none;"></p>
+
+                <button id="user_forgot" type="submit" class="sub_button">Show secret question</button>
+                
+                <p id="sec_que_forgot" style="color: aliceblue; display: none;">Your Secret Question is</p>
+                <p id="sec_que_display" style="color: aliceblue; display: none;"></p>
+
+                <div class="input_box">
+                    <input type="text" style="display: none;" id="sec_ans_forgot" required>
+                    <label style="display: none;">Secret Answer</label>
+                </div>
+
+                <p id="password_forgot" style="color: aliceblue; display: none;">Your Secret Question is</p>
+                <p id="password_display" style="color: aliceblue; display: none;"></p>
+
+
+                <div class="signup">
+                    <p>Go back to login page - <a href="#" class="signin_button2">Login</a></p>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -170,7 +276,7 @@
 
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
-            var errorMessage = document.getElementById('error-msg');
+            var errorMessage = document.getElementById('error-msg-1');
 
             fetch('loginPrac.json')
             .then(response => response.json())
@@ -179,19 +285,15 @@
                 var matchFound = false;
                 for (let i=0; i<data.length; i++) {
                     if ((data[i].username == username) && (data[i].password == password)) {
-                        // Authentication successful
-                        errorMessage.textContent = 'Correct username and password.';
-                        errorMessage.style.display = 'block';
-                        //errorMessage.style.display = 'none';
+                        errorMessage.style.display = 'none';
                         matchFound = true;
                         window.location.href = 'mainPrac.html'; 
                     } 
                     
                 }
                 if(!matchFound) {
-                    // Authentication failed
                     errorMessage.textContent = 'Incorrect username or password.';
-                    errorMessage.style.display = 'block'; // Show error message
+                    errorMessage.style.display = 'block'; 
                 }
             })
             .catch(error => {
@@ -199,6 +301,66 @@
             });
         });
 
+    </script>
+
+    <script>
+        const signin_button1 = document.querySelector('.signin_button1');
+        const signup_button = document.querySelector('.signup_button');
+        const signin_button2 = document.querySelector('.signin_button2');
+        const forgot_button = document.querySelector('.forgot_button');
+        const box = document.querySelector('.box');
+
+        signup_button.addEventListener('click', () => {
+            box.classList.toggle('active');
+        });
+        signin_button1.addEventListener('click', () => {
+            box.classList.toggle('active');
+        });
+
+        forgot_button.addEventListener('click', () => {
+            box.classList.toggle('passive');
+        })
+        signin_button2.addEventListener('click', () => {
+            box.classList.toggle('passive');
+        });
+    </script>
+
+    <script>
+        document.getElementById('forgotForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            var username_forgot = document.getElementById('username_forgot').value;
+            var errorMessage = document.getElementById('error-msg-2');
+            var show_sec_que_button = document.getElementById('user_forgot');
+            var show_sec_forgot = document.getElementById('sec_que_forgot');
+            var show_sec_que = document.getElementById('sec_que_display');
+
+            fetch('loginPrac.json')
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                var matchFound = false;
+                for (let i=0; i<data.length; i++) {
+                    if (data[i].username == username.forgot) {
+                        show_sec_que_button.style.display = 'none';
+                        show_sec_forgot.style.display = 'block';
+                        show_sec_que.textContent = data[i].secret_question;
+                        show_sec_que.style.display = 'block';
+                        matchFound = true;
+                    } 
+                    
+                }
+                if(!matchFound) {
+                    errorMessage.textContent = 'Incorrect username.';
+                    errorMessage.style.display = 'block'; 
+                }
+
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
     </script>
 
 </body>
