@@ -37,6 +37,10 @@
         cursor: pointer;
       }
 
+      nav #nav-logout {
+        float: right;
+      }
+
       .box {
         position: relative;
         width: 100vw;
@@ -242,6 +246,7 @@
         <li id="nav-home">Home</li>
         <li id="nav-explore">Explore</li>
         <li id="nav-match">Find my match</li>
+        <li id="nav-logout">Logout</li>
       </ul>
     </nav>
     <div class="box">
@@ -477,6 +482,7 @@
       var nav_home_button = document.getElementById("nav-home");
       var nav_explore_button = document.getElementById("nav-explore");
       var nav_match_button = document.getElementById("nav-match");
+      var nav_logout_button = document.getElementById("nav-logout");
       var home = document.getElementById("home");
       var explore = document.getElementById("explore");
       var match = document.getElementById("match");
@@ -523,6 +529,10 @@
         home.style.display = "none";
         explore.style.display = "none";
         match.style.display = "block";
+      });
+
+      nav_logout_button.addEventListener("click", () => {
+        window.location.href = 'loginPrac2.html'; 
       });
     </script>
 
