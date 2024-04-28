@@ -44,8 +44,23 @@
             transition: 0.7s ease-in-out;
         }
 
+        .box.active .login_box {
+            transform: translateY(-500px);
+        }
+
         .box.passive .login_box {
             transform: translateY(-500px);
+        }
+
+        .box .signup_box {
+            position: relative;
+            top: 480px;
+            left: 0;
+            transition: 1s ease-in-out;
+        }
+
+        .box.active .signup_box {
+            transform: translateY(-900px);
         }
 
         .box .forgot_box {
@@ -56,7 +71,7 @@
         }
 
         .box.passive .forgot_box {
-            transform: translateY(-790px);
+            transform: translateY(-1300px);
         }
 
 
@@ -195,6 +210,42 @@
 
                 <button id="login" type="submit" class="sub_button">Login</button>
 
+                <div class="signup">
+                    <p>Don't have an account? <a href="#" class="signup_button">Sign Up</a></p>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="signup_box">
+            <h1>Sign up</h1>
+
+            <form id="signUpForm">
+                <div class="input_box">
+                    <input type="text" id="username_signup" required>
+                    <label>Username</label>
+                </div>
+
+                <div class="input_box">
+                    <input type="text" id="password_signup" required>
+                    <label>Password</label>
+                </div>
+
+                <div class="input_box">
+                    <input type="text" id="sec_que_signup" required>
+                    <label>Secret Question</label>
+                </div>
+
+                <div class="input_box">
+                    <input type="text" id="sec_ans_signup" required>
+                    <label>Secret Answer</label>
+                </div>
+                
+                <button id="signUp" type="submit" class="sub_button">Sign Up</button>
+
+                <div class="signup">
+                    <p>Already have an account? <a href="#" class="signin_button1">Sign in</a></p>
+                </div>
             </form>
         </div>
 
@@ -344,10 +395,49 @@
     </script>
 
     <script>
+        document.getElementById('signUpForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var username_signup = document.getElementById('username_signup')?.value;
+            var password_signup = document.getElementById('password_signup')?.value;
+            var sec_que_signup = document.getElementById('sec_que_signup')?.value;
+            var sec_ans_signup = document.getElementById('sec_ans_signup')?.value;
+
+            let newUser = {
+                username: username_signup, 
+                password: password_signup, 
+                secret_question: sec_que_signup,
+                secret_answer: sec_ans_signup
+            }
+
+            let signUpEntries = JSON.parse(localStorage.getItem("signUpEntries"));
+            
+            if(!signUpEntries) {
+                fetch('loginPrac.json')
+                    .then(response => response.json())
+                    .then(data => {localStorage.setItem("signUpEntries", JSON.stringify([...data, newUser]))});
+                
+            } else {
+                localStorage.setItem("signUpEntries", JSON.stringify([...signUpEntries, newUser]));
+            }
+
+            window.location.href = 'main.html';
+        });
+    </script>
+
+    <script>
         // To animate sliding login page and forgot password page
+        const signin_button1 = document.querySelector('.signin_button1');
+        const signup_button = document.querySelector('.signup_button');
         const signin_button2 = document.querySelector('.signin_button2');
         const forgot_button = document.querySelector('.forgot_button');
         const box = document.querySelector('.box');
+        
+        signup_button.addEventListener('click', () => {
+            box.classList.toggle('active');
+        });
+        signin_button1.addEventListener('click', () => {
+            box.classList.toggle('active');
+        });
 
         forgot_button.addEventListener('click', () => {
             box.classList.toggle('passive');
