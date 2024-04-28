@@ -1,627 +1,547 @@
 <!DOCTYPE >
 <html>
-  <head>
-    <title>Login Page</title>
-    <style>
-      body {
-        justify-content: center;
-        align-items: center;
-        font-family: Arial;
-        margin: 0;
-        padding: 0;
-        background-image: url("background.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-
-      nav {
-        background-color: rgba(18, 83, 111, 0.9);
-        color: rgb(255, 255, 255);
-        height: 50px;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 15px 20px;
-      }
-
-      nav li {
-        text-align: center;
-        display: inline;
-        padding: 0 10px;
-        cursor: pointer;
-      }
-
-      nav #nav-logout {
-        float: right;
-      }
-
-      .box {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        padding: 20px;
-        text-align: center;
-        background-color: rgba(18, 83, 111, 0.4);
-        overflow: scroll;
-      }
-
-      #home {
-        display: block;
-      }
-
-      #explore {
-        display: none;
-      }
-
-      #match {
-        display: none;
-      }
-
-      .box form {
-        width: 100%;
-      }
-
-      .box .login_box {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        transition: 1s ease-in-out;
-      }
-
-      .box.active .login_box {
-        transform: translateY(-500px);
-      }
-
-      .box.passive .login_box {
-        transform: translateY(-500px);
-      }
-
-      .box .signup_box {
-        position: absolute;
-        top: 480px;
-        left: 0;
-        transition: 1s ease-in-out;
-      }
-
-      .box.active .signup_box {
-        transform: translateY(-480px);
-      }
-
-      .box .forgot_box {
-        position: absolute;
-        top: 480px;
-        left: 0;
-        transition: 1s ease-in-out;
-      }
-
-      .box.passive .forgot_box {
-        transform: translateY(-400px);
-      }
-
-      h1 {
-        text-align: center;
-        color: aliceblue;
-      }
-
-      .input_box,
-      .radio_box,
-      .checkbox_box {
-        position: relative;
-        margin: 25px 0;
-      }
-
-      .input_box input {
-        width: 90%;
-        height: 50px;
-        background: transparent;
-        border: 2px solid;
-        outline: none;
-        border-radius: 40px;
-        font-size: 2em;
-        color: #0b0000;
-        padding: 0 20px;
-        transition: 0.5 ease;
-      }
-
-      .input_box input:focus,
-      .input_box input:valid {
-        top: 1px;
-        left: 20px;
-        font-size: 0.9em;
-        padding: 0 23px;
-        background-color: transparent;
-        color: aliceblue;
-      }
-
-      .input_box label {
-        position: absolute;
-        top: 50%;
-        left: 30px;
-        transform: translateY(-50%);
-        font-size: 1em;
-        color: rgb(209, 203, 203);
-        transition: 0.5s ease;
-      }
-
-      .input_box input:focus~label,
-      .input_box input:valid~label {
-        top: 1px;
-        font-size: 0.8em;
-        padding: 0 6px;
-        background-color: rgb(18, 83, 111);
-        color: aliceblue;
-      }
-
-      .radio_box .items,
-      .checkbox_box .items {
-        width: 90%;
-        padding: 0 30px;
-        color: rgb(209, 203, 203);
-      }
-
-      .radio_box p,
-      .checkbox_box p {
-        color: rgb(209, 203, 203);
-      }
-
-      .items .item {
-        display: block;
-        text-align: left;
-      }
-
-      .card {
-        width: 90%;
-        height: auto;
-        background: rgb(255, 255, 255);
-        border: 2px solid;
-        outline: none;
-        border-radius: 5px;
-        font-size: 2em;
-        color: #0b0000;
-        padding: 0 20px;
-        transition: 0.5 ease;
-      }
-
-      .forgot_password {
-        margin: 10px 0 20px;
-        text-align: center;
-      }
-
-      .forgot_password a {
-        font-size: 1em;
-        color: rgb(15, 220, 220);
-        text-decoration: none;
-      }
-
-      .forgot_password a:hover {
-        text-decoration: underline;
-      }
-
-      .sub_button {
-        width: 90%;
-        height: 45px;
-        background-color: rgba(210, 67, 90, 0.9);
-        border: none;
-        outline: none;
-        border-radius: 40px;
-        cursor: pointer;
-        font-size: 1.1em;
-        color: white;
-        font-weight: 500;
-      }
-
-      .sub_button:hover {
-        background-color: rgb(117, 11, 47);
-        color: white;
-      }
-
-      .signup {
-        margin: 20px 0 10px;
-        text-align: center;
-        color: rgb(224, 221, 221);
-      }
-
-      .signup a {
-        font-size: 1em;
-        color: rgb(15, 220, 220);
-        font-weight: 545;
-        text-decoration: none;
-      }
-
-      .signup a:hover {
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-
-  <body>
-    <nav>
-      <ul>
-        <li id="nav-home">Home</li>
-        <li id="nav-explore">Explore</li>
-        <li id="nav-match">Find my match</li>
-        <li id="nav-logout">Logout</li>
-      </ul>
-    </nav>
-    <div class="box">
-      <div id="home">
-        <h1>Welcome!</h1>
-      </div>
-      <div id="explore">
-        <h1>All Profiles</h1>
-        <div id="all-profiles"></div>
-      </div>
-      <div id="match">
-        <form id="findMatchForm">
-          <div class="input_box">
-            <input type="text" id="roll_match" />
-            <label for="IITB Roll Number">IITB Roll Number</label>
-          </div>
-
-          <div class="input_box">
-            <input type="text" id="name_match" />
-            <label for="Name">Name</label>
-          </div>
-
-          <div class="input_box">
-            <input type="text" id="year_match" />
-            <label for="Year of Study">Year of Study</label>
-          </div>
-
-          <div class="input_box">
-            <input type="text" id="age_match" />
-            <label for="Age">Age</label>
-          </div>
-
-          <div class="radio_box">
-            <label for="Gender">Gender</label>
-            <div class="items">
-              <div class="item">
-                <input
-                  type="radio"
-                  id="female"
-                  name="gender_match"
-                  value="Female"
-                />
-                <label>Female</label>
-              </div>
-              <div class="item">
-                <input
-                  type="radio"
-                  id="male"
-                  name="gender_match"
-                  value="Male"
-                />
-                <label>Male</label>
-              </div>
-              <div class="item">
-                <input
-                  type="radio"
-                  id="other"
-                  name="gender_match"
-                  value="Other"
-                />
-                <label>Other</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_box">
-            <label for="Interests">Interests</label>
-            <div class="items">
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="art"
-                  name="interests_match"
-                  value="Art"
-                />
-                <label>Art</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="fashion"
-                  name="interests_match"
-                  value="Fashion"
-                />
-                <label>Fashion</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="lit"
-                  name="interests_match"
-                  value="Literature"
-                />
-                <label>Literature</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="movie"
-                  name="interests_match"
-                  value="Movies"
-                />
-                <label>Movies</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="music"
-                  name="interests_match"
-                  value="Music"
-                />
-                <label>Music</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="sport"
-                  name="interests_match"
-                  value="Sports"
-                />
-                <label>Sports</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="tech"
-                  name="interests_match"
-                  value="Technology"
-                />
-                <label>Technology</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="travel"
-                  name="interests_match"
-                  value="Travelling"
-                />
-                <label>Travelling</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_box">
-            <label for="Hobbies">Hobbies</label>
-            <div class="items">
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="coding"
-                  name="hobbies_match"
-                  value="Coding"
-                />
-                <label>Coding</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="cook"
-                  name="hobbies_match"
-                  value="Cooking"
-                />
-                <label>Cooking</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="garden"
-                  name="hobbies_match"
-                  value="Gardening"
-                />
-                <label>Gardening</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="paint"
-                  name="hobbies_match"
-                  value="Painting"
-                />
-                <label>Painting</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="photo"
-                  name="hobbies_match"
-                  value="Photography"
-                />
-                <label>Photography</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="instrument"
-                  name="hobbies_match"
-                  value="Playing Musical Instruments"
-                />
-                <label>Playing Musical Instruments</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="read"
-                  name="hobbies_match"
-                  value="Reading"
-                />
-                <label>Reading</label>
-              </div>
-              <div class="item">
-                <input
-                  type="checkbox"
-                  id="youtube"
-                  name="hobbies_match"
-                  value="Watching YouTube/Instagram"
-                />
-                <label>Watching YouTube/Instagram</label>
-              </div>
-            </div>
-          </div>
-
-          <p id="error-msg-match" style="color: red; display: none"></p>
-
-          <button id="findMatch" type="submit" class="sub_button">
-            Find My Match
-          </button>
-        </form>
-        <div id="match-found"></div>
-      </div>
-    </div>
-
-    <script>
-      var nav_home_button = document.getElementById("nav-home");
-      var nav_explore_button = document.getElementById("nav-explore");
-      var nav_match_button = document.getElementById("nav-match");
-      var nav_logout_button = document.getElementById("nav-logout");
-      var home = document.getElementById("home");
-      var explore = document.getElementById("explore");
-      var match = document.getElementById("match");
-
-      var profiles = document.getElementById("all-profiles");
-
-      nav_home_button.addEventListener("click", () => {
-        home.style.display = "block";
-        explore.style.display = "none";
-        match.style.display = "none";
-      });
-
-      nav_explore_button.addEventListener("click", () => {
-        home.style.display = "none";
-        explore.style.display = "block";
-        match.style.display = "none";
-
-        fetch("students.json")
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-              let newDiv = document.createElement("div");
-              newDiv.id = data[i]["IITB Roll Number"];
-              newDiv.className = "card";
-              newDiv.innerHTML = `
-                <img src=${data[i]["Photo"]} />
-                <h2>${data[i]["Name"]}</h2>
-                <p>${data[i]["Year of Study"]}</p>
-                <p>${data[i]["Age"]}</p>
-                <p>${data[i]["Gender"]}</p>
-                <p>${data[i]["Interests"]}</p>
-                <p>${data[i]["Hobbies"]}</p>
-                `;
-              profiles.appendChild(newDiv);
+    <head>
+        <title>Right Match Dating Website</title>
+        <style>
+            body {
+                justify-content: center;
+                align-items: center;
+                font-family: Arial;
+                margin-top: 0;
+                padding: 0;
+                background-image: url("background3.png");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
             }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      });
 
-      nav_match_button.addEventListener("click", () => {
-        home.style.display = "none";
-        explore.style.display = "none";
-        match.style.display = "block";
-      });
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 50px;
+                padding: 20px 30px;
+                color: rgb(255, 255, 255);
+                background-color: rgba(10, 42, 55, 0.95);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 100;
 
-      nav_logout_button.addEventListener("click", () => {
-        window.location.href = 'loginPrac2.html'; 
-      });
-    </script>
+            }
 
-    <script>
-      document
-        .getElementById("findMatchForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
+            nav {
+                margin-right: 45px;
+            }
 
-          var roll_match = document.getElementById("roll_match").value;
-          var name_match = document.getElementById("name_match").value;
-          var year_match = document.getElementById("year_match").value;
-          var age_match = document.getElementById("age_match").value;
-          var gender_match = document.querySelector(
-            'input[name="gender_match"]:checked'
-          ).value;
-          var interests = [];
-          var interests_match = document.querySelectorAll(
-            'input[name="interests_match"]:checked'
-          );
-          var hobbies = [];
-          var hobbies_match = document.querySelectorAll(
-            'input[name="hobbies_match"]:checked'
-          );
-          var errorMessage = document.getElementById("error-msg-match");
+            nav a{
+                font-size: 18px;
+                color: aliceblue;
+                text-decoration: none;
+                font-weight: 500;
+                margin-left: 25px;
+            }
 
-          for (var i = 0; i < interests_match?.length; i++) {
-            interests.push(interests_match[i].value);
-          }
+            .logo {
+                font-size: 25px;
+                color: aliceblue;
+                text-decoration: none;
+                font-weight: 600;
+                float: left;
+            }
 
-          for (var i = 0; i < hobbies_match?.length; i++) {
-            hobbies.push(hobbies_match[i].value);
-          }
+            .box {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+                padding: 20px;
+                text-align: center;
+                overflow: scroll;
+            }
 
-          fetch("students.json")
-            .then((response) => response.json())
-            .then((data) => {
-              // console.log(data)
-              var match_found = document.getElementById("match-found");
-              var findMatchForm = document.getElementById("findMatchForm");
+            .home h1{
+                margin-top: 200px;
+            }
 
-              var rightMatchIndex = -1;
-              var matchCount = 0;
-              for (let i = 0; i < data?.length; i++) {
-                if (data["IITB Roll Number"] !== roll_match) {
-                  const commonInterests = interests.filter((value) =>
-                    data[i]["Interests"].includes(value)
-                  );
-                  const commonHobbies = hobbies.filter((value) =>
-                    data[i]["Hobbies"].includes(value)
-                  );
+            #home {
+                display: block;
+            }
 
-                  var currCount = commonInterests.length + commonHobbies.length;
+            #explore {
+                display: none;
+            }
 
-                  if (currCount > matchCount) {
-                    matchCount = currCount;
-                    rightMatchIndex = i;
-                  }
-                }
-              }
-              if (rightMatchIndex == -1) {
-                findMatchForm.style.display = "none";
-                let newDiv = document.createElement("div");
-                newDiv.className = "card";
-                newDiv.innerHTML = `
-                <h2>Sorry, no match found</h2>
-                `;
-                match_found.appendChild(newDiv);
-              } else {
-                findMatchForm.style.display = "none";
-                let newDiv = document.createElement("div");
-                newDiv.id = data[rightMatchIndex]["IITB Roll Number"];
-                newDiv.className = "card";
-                newDiv.innerHTML = `
-                <img src=${data[rightMatchIndex]["Photo"]} />
-                <h2>${data[rightMatchIndex]["Name"]}</h2>
-                <p>${data[rightMatchIndex]["Year of Study"]}</p>
-                <p>${data[rightMatchIndex]["Age"]}</p>
-                <p>${data[rightMatchIndex]["Gender"]}</p>
-                <p>${data[rightMatchIndex]["Interests"]}</p>
-                <p>${data[rightMatchIndex]["Hobbies"]}</p>
-                `;
-                match_found.appendChild(newDiv);
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
+            #match {
+                display: none;
+            }
+
+            /*.box form {
+                width: 100%;
+            }
+
+            .box .login_box {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                transition: 1s ease-in-out;
+            }
+
+            .box.active .login_box {
+                transform: translateY(-500px);
+            }
+
+            .box.passive .login_box {
+                transform: translateY(-500px);
+            }
+
+            .box .signup_box {
+                position: absolute;
+                top: 480px;
+                left: 0;
+                transition: 1s ease-in-out;
+            }
+
+            .box.active .signup_box {
+                transform: translateY(-480px);
+            }
+
+            .box .forgot_box {
+                position: absolute;
+                top: 480px;
+                left: 0;
+                transition: 1s ease-in-out;
+            }
+
+            .box.passive .forgot_box {
+                transform: translateY(-400px);
+            }
+
+            h1 {
+                text-align: center;
+                color: aliceblue;
+            }
+
+            .input_box,
+            .radio_box,
+            .checkbox_box {
+                position: relative;
+                margin: 25px 0;
+            }
+
+            .input_box input {
+                width: 90%;
+                height: 50px;
+                background: transparent;
+                border: 2px solid;
+                outline: none;
+                border-radius: 40px;
+                font-size: 2em;
+                color: #0b0000;
+                padding: 0 20px;
+                transition: 0.5 ease;
+            }
+
+            .input_box input:focus,
+            .input_box input:valid {
+                top: 1px;
+                left: 20px;
+                font-size: 0.9em;
+                padding: 0 23px;
+                background-color: transparent;
+                color: aliceblue;
+            }
+
+            .input_box label {
+                position: absolute;
+                top: 50%;
+                left: 30px;
+                transform: translateY(-50%);
+                font-size: 1em;
+                color: rgb(209, 203, 203);
+                transition: 0.5s ease;
+            }
+
+            .input_box input:focus~label,
+            .input_box input:valid~label {
+                top: 1px;
+                font-size: 0.8em;
+                padding: 0 6px;
+                background-color: rgb(18, 83, 111);
+                color: aliceblue;
+            }*/
+
+            .radio_box .items,
+            .checkbox_box .items {
+                width: 90%;
+                padding: 0 30px;
+                color: rgb(209, 203, 203);
+            }
+
+            .radio_box p,
+            .checkbox_box p {
+                color: rgb(209, 203, 203);
+            }
+
+            .items .item {
+                display: block;
+                text-align: left;
+            }
+
+            .card {
+                width: 90%;
+                height: auto;
+                background: rgb(255, 255, 255);
+                border: 2px solid;
+                outline: none;
+                border-radius: 5px;
+                font-size: 2em;
+                color: #0b0000;
+                padding: 0 20px;
+                transition: 0.5 ease;
+            }
+
+            /* .forgot_password {
+            margin: 10px 0 20px;
+            text-align: center;
+        }
+
+        .forgot_password a {
+            font-size: 1em;
+            color: rgb(15, 220, 220);
+            text-decoration: none;
+        }
+
+        .forgot_password a:hover {
+            text-decoration: underline;
+        }
+
+        .sub_button {
+            width: 90%;
+            height: 45px;
+            background-color: rgba(210, 67, 90, 0.9);
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: white;
+            font-weight: 500;
+        }
+
+        .sub_button:hover {
+            background-color: rgb(117, 11, 47);
+            color: white;
+        }
+
+        .signup {
+            margin: 20px 0 10px;
+            text-align: center;
+            color: rgb(224, 221, 221);
+        }
+
+        .signup a {
+            font-size: 1em;
+            color: rgb(15, 220, 220);
+            font-weight: 545;
+            text-decoration: none;
+        }
+
+        .signup a:hover {
+            text-decoration: underline;
+        } */
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <a href="#" class="logo">Right Match.com</a>
+            <nav>
+                <a href="main.html">Home</a>
+                <a href="scroll_or_swipe.html">Explore</a>
+                <a href="input.html">Find my match</a>
+                <a href="login.html">Logout</a>
+            </nav>
+        </header>
+
+        <div class="box">
+            <div id="home">
+                <h1 style="margin-top: 180px; margin-left: -800;">Welcome!</h1>
+            </div>
+
+            <div id="explore">
+                <h1>All Profiles</h1>
+                <div id="all-profiles"></div>
+            </div>
+                
+            <div id="match">
+                <form id="findMatchForm">
+                    <div class="input_box">
+                        <input type="text" id="roll_match" />
+                        <label for="IITB Roll Number">IITB Roll Number</label>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="text" id="name_match" />
+                        <label for="Name">Name</label>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="text" id="year_match" />
+                        <label for="Year of Study">Year of Study</label>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="text" id="age_match" />
+                        <label for="Age">Age</label>
+                    </div>
+
+                    <div class="radio_box">
+                        <label for="Gender">Gender</label>
+                        <div class="items">
+                            <div class="item">
+                                <input type="radio" id="female" name="gender_match" value="Female"/>
+                                <label>Female</label>
+                            </div>
+                            <div class="item">
+                                <input type="radio" id="male" name="gender_match" value="Male"/>
+                                <label>Male</label>
+                            </div>
+                            <div class="item">
+                                <input type="radio" id="other" name="gender_match" value="Other"/>
+                                <label>Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkbox_box">
+                        <label for="Interests">Interests</label>
+                        <div class="items">
+                            <div class="item">
+                                <input type="checkbox" id="art" name="interests_match" value="Art"/>
+                                <label>Art</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="fashion" name="interests_match" value="Fashion"/>
+                                <label>Fashion</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="lit" name="interests_match" value="Literature"/>
+                                <label>Literature</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="movie" name="interests_match" value="Movies"/>
+                                <label>Movies</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="music" name="interests_match" value="Music"/>
+                                <label>Music</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="sport" name="interests_match" value="Sports"/>
+                                <label>Sports</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="tech" name="interests_match" value="Technology"/>
+                                <label>Technology</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="travel" name="interests_match" value="Travelling"/>
+                                <label>Travelling</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkbox_box">
+                        <label for="Hobbies">Hobbies</label>
+                        <div class="items">
+                            <div class="item">
+                                <input type="checkbox" id="coding" name="hobbies_match" value="Coding"/>
+                                <label>Coding</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="cook" name="hobbies_match" value="Cooking"/>
+                                <label>Cooking</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="garden" name="hobbies_match" value="Gardening"/>
+                                <label>Gardening</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="paint" name="hobbies_match" value="Painting"/>
+                                <label>Painting</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="photo" name="hobbies_match" value="Photography"/>
+                                <label>Photography</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="instrument" name="hobbies_match" value="Playing Musical Instruments"/>
+                                <label>Playing Musical Instruments</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="read" name="hobbies_match" value="Reading"/>
+                                <label>Reading</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="youtube" name="hobbies_match" value="Watching YouTube/Instagram"/>
+                                <label>Watching YouTube/Instagram</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p id="error-msg-match" style="color: red; display: none"></p>
+
+                    <button id="findMatch" type="submit" class="sub_button">Find My Match</button>
+                </form>
+                <div id="match-found"></div>
+            </div>
+        </div>
+
+        <script>
+            var nav_home_button = document.getElementById("nav-home");
+            var nav_explore_button = document.getElementById("nav-explore");
+            var nav_match_button = document.getElementById("nav-match");
+            var nav_logout_button = document.getElementById("nav-logout");
+            var home = document.getElementById("home");
+            var explore = document.getElementById("explore");
+            var match = document.getElementById("match");
+
+            var profiles = document.getElementById("all-profiles");
+
+            nav_home_button.addEventListener("click", () => {
+                home.style.display = "block";
+                explore.style.display = "none";
+                match.style.display = "none";
             });
-        });
-    </script>
-  </body>
+
+            nav_explore_button.addEventListener("click", () => {
+                home.style.display = "none";
+                explore.style.display = "block";
+                match.style.display = "none";
+
+                fetch("students.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                    let newDiv = document.createElement("div");
+                    newDiv.id = data[i]["IITB Roll Number"];
+                    newDiv.className = "card";
+                    newDiv.innerHTML = `
+                        <img src=${data[i]["Photo"]} />
+                        <h2>${data[i]["Name"]}</h2>
+                        <p>${data[i]["Year of Study"]}</p>
+                        <p>${data[i]["Age"]}</p>
+                        <p>${data[i]["Gender"]}</p>
+                        <p>${data[i]["Interests"]}</p>
+                        <p>${data[i]["Hobbies"]}</p>
+                        `;
+                    profiles.appendChild(newDiv);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+            });
+
+            nav_match_button.addEventListener("click", () => {
+                home.style.display = "none";
+                explore.style.display = "none";
+                match.style.display = "block";
+            });
+
+            nav_logout_button.addEventListener("click", () => {
+                window.location.href = 'loginPrac2.html'; 
+            });
+        </script>
+
+        <script>
+            document
+                .getElementById("findMatchForm")
+                .addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                var roll_match = document.getElementById("roll_match").value;
+                var name_match = document.getElementById("name_match").value;
+                var year_match = document.getElementById("year_match").value;
+                var age_match = document.getElementById("age_match").value;
+                var gender_match = document.querySelector(
+                    'input[name="gender_match"]:checked'
+                ).value;
+                var interests = [];
+                var interests_match = document.querySelectorAll(
+                    'input[name="interests_match"]:checked'
+                );
+                var hobbies = [];
+                var hobbies_match = document.querySelectorAll(
+                    'input[name="hobbies_match"]:checked'
+                );
+                var errorMessage = document.getElementById("error-msg-match");
+
+                for (var i = 0; i < interests_match?.length; i++) {
+                    interests.push(interests_match[i].value);
+                }
+
+                for (var i = 0; i < hobbies_match?.length; i++) {
+                    hobbies.push(hobbies_match[i].value);
+                }
+
+                fetch("students.json")
+                    .then((response) => response.json())
+                    .then((data) => {
+                    // console.log(data)
+                    var match_found = document.getElementById("match-found");
+                    var findMatchForm = document.getElementById("findMatchForm");
+
+                    var rightMatchIndex = -1;
+                    var matchCount = 0;
+                    for (let i = 0; i < data?.length; i++) {
+                        if (data["IITB Roll Number"] !== roll_match) {
+                        const commonInterests = interests.filter((value) =>
+                            data[i]["Interests"].includes(value)
+                        );
+                        const commonHobbies = hobbies.filter((value) =>
+                            data[i]["Hobbies"].includes(value)
+                        );
+
+                        var currCount = commonInterests.length + commonHobbies.length;
+
+                        if (currCount > matchCount) {
+                            matchCount = currCount;
+                            rightMatchIndex = i;
+                        }
+                        }
+                    }
+                    if (rightMatchIndex == -1) {
+                        findMatchForm.style.display = "none";
+                        let newDiv = document.createElement("div");
+                        newDiv.className = "card";
+                        newDiv.innerHTML = `
+                        <h2>Sorry, no match found</h2>
+                        `;
+                        match_found.appendChild(newDiv);
+                    } else {
+                        findMatchForm.style.display = "none";
+                        let newDiv = document.createElement("div");
+                        newDiv.id = data[rightMatchIndex]["IITB Roll Number"];
+                        newDiv.className = "card";
+                        newDiv.innerHTML = `
+                        <img src=${data[rightMatchIndex]["Photo"]} />
+                        <h2>${data[rightMatchIndex]["Name"]}</h2>
+                        <p>${data[rightMatchIndex]["Year of Study"]}</p>
+                        <p>${data[rightMatchIndex]["Age"]}</p>
+                        <p>${data[rightMatchIndex]["Gender"]}</p>
+                        <p>${data[rightMatchIndex]["Interests"]}</p>
+                        <p>${data[rightMatchIndex]["Hobbies"]}</p>
+                        `;
+                        match_found.appendChild(newDiv);
+                    }
+                    })
+                    .catch((error) => {
+                    console.error("Error:", error);
+                    });
+                });
+        </script>
+    </body>
 </html>
