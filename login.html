@@ -171,7 +171,8 @@
 </head>
 
 <body>
-    <div class="box">
+    <!-- for login page -->
+    <div class="box">   
         <div class="login_box">
             <h1>Login</h1>
 
@@ -197,7 +198,7 @@
             </form>
         </div>
 
-
+        <!-- for forgot password page -->
         <div class="forgot_box">
             <h1>Forgot Password?</h1>
 
@@ -238,6 +239,7 @@
     </div>
 
     <script>
+        // to check if username and password are correct in login page
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault(); 
 
@@ -270,6 +272,7 @@
     </script>
 
     <script>
+        // to check if username and secret answer are correct in forgot password page
         document.getElementById('forgotForm').addEventListener('submit', function(event) {
             event.preventDefault();
             var username_forgot = document.getElementById('username_forgot').value;
@@ -341,6 +344,7 @@
     </script>
 
     <script>
+        // To animate sliding login page and forgot password page
         const signin_button2 = document.querySelector('.signin_button2');
         const forgot_button = document.querySelector('.forgot_button');
         const box = document.querySelector('.box');
