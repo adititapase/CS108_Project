@@ -318,55 +318,7 @@
 
     </script>
         
-    <script>
-        document.getElementById('signUpForm').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-
-            var username = document.getElementById('username_signup').value;
-            var password = document.getElementById('password_signup').value;
-            var sec_que = document.getElementById('sec_que_signup').value;
-            var sec_ans = document.getElementById('sec_ans_signup').value;
-
-            const fs = require('fs');
-
-            // Read the contents of the JSON file
-            const data = fs.readFileSync('loginPrac.json');
-            // Parse the JSON data into a JavaScript object
-            const jsonData = JSON.parse(data);
-
-            console.log("Before Adding data",JSON.stringify(jsonData, null, 4));
-
-            // Modify the JavaScript object by adding new data
-            jsonData.users.push({
-                username: username,
-                password: password,
-                secret_question: sec_que,
-                secret_answer: sec_ans
-            });
-
-
-            // Convert the JavaScript object back into a JSON string
-            const jsonString = JSON.stringify(jsonData);
-
-            fs.writeFileSync('loginPrac.json', jsonString, 'utf-8', (err) => {
-            if (err) throw err;
-            console.log('Data added to file');
-            });
-
-            const update_data = fs.readFileSync('loginPrac.json');
-            const updated_jsonData = JSON.parse(update_data);
-            console.log("After Adding data",JSON.stringify(updated_jsonData, null, 4));
-        //     fetch('loginPrac.json')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         data.push("username" = username,
-        //         "password" = password,
-        //         "secret_question" = sec_que,
-        //         "secret_answer" = sec_ans);
-
-        //     })
-        });
-    </script>
+    <script src="signUp.js"></script>
 
     <script>
         document.getElementById('forgotForm').addEventListener('submit', function(event) {
