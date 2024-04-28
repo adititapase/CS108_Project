@@ -479,7 +479,6 @@
                     </div>
                 </form>
                 <div id="match-found" class="container">
-                    <h1 id="right" style="position: relative; color: aliceblue; display: none;">Right Match</h1>
                 </div>
             </div>
         </div>
@@ -499,12 +498,22 @@
                 home.style.display = "block";
                 explore.style.display = "none";
                 match.style.display = "none";
+
+                var findMatchForm = document.getElementById("findMatchForm");
+                findMatchForm.style.display = "flex";
+                var matchFound = document.getElementById("match-found");
+                matchFound.lastChild && matchFound.removeChild(matchFound.lastChild);
             });
 
             nav_explore_button.addEventListener("click", () => {
                 home.style.display = "none";
                 explore.style.display = "block";
                 match.style.display = "none";
+
+                var findMatchForm = document.getElementById("findMatchForm");
+                findMatchForm.style.display = "flex";
+                var matchFound = document.getElementById("match-found");
+                matchFound.lastChild && matchFound.removeChild(matchFound.lastChild);
 
                 fetch("students.json")
                 .then((response) => response.json())
@@ -534,10 +543,20 @@
                 home.style.display = "none";
                 explore.style.display = "none";
                 match.style.display = "block";
+
+                var findMatchForm = document.getElementById("findMatchForm");
+                findMatchForm.style.display = "flex";
+                var matchFound = document.getElementById("match-found");
+                matchFound.lastChild && matchFound.removeChild(matchFound.lastChild);
             });
 
             nav_logout_button.addEventListener("click", () => {
                 window.location.href = 'login.html'; 
+
+                var findMatchForm = document.getElementById("findMatchForm");
+                findMatchForm.style.display = "flex";
+                var matchFound = document.getElementById("match-found");
+                matchFound.lastChild && matchFound.removeChild(matchFound.lastChild);
             });
         </script>
 
@@ -578,7 +597,7 @@
                     // console.log(data)
                     var match_found = document.getElementById("match-found");
                     var findMatchForm = document.getElementById("findMatchForm");
-                    var rightm = document.getElementById("right");
+                    // var rightm = document.getElementById("right");
 
                     var rightMatchIndex = -1;
                     var matchCount = 0;
@@ -609,11 +628,12 @@
                         match_found.appendChild(newDiv);
                     } else {
                         findMatchForm.style.display = "none";
-                        rightm.style.display = 'block';
+                        // rightm.style.display = 'block';
                         let newDiv = document.createElement("div");
                         newDiv.id = data[rightMatchIndex]["IITB Roll Number"];
                         newDiv.className = "profile-box";
                         newDiv.innerHTML = `
+                        <h1 id="right" style="position: relative; color: aliceblue; display: none;">Right Match</h1>
                         <img src=${data[rightMatchIndex]["Photo"]} class="profile-pic"/>
                             <h2>${data[rightMatchIndex]["Name"]}</h2>
                             <p>${data[rightMatchIndex]["Gender"]}, ${data[rightMatchIndex]["Age"]}, ${data[rightMatchIndex]["Year of Study"]} year</p>
